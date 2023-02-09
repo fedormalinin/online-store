@@ -1,9 +1,13 @@
+import './Footer.scss'
+
 function Footer () {
-    return (
-        <footer>
-            <h1>Footer</h1>
-        </footer>
-    )
+  return (
+    <footer className="footer">
+      <div className="footer-container">
+        <h3 className="footer-text">© 2023 Malinoff. All Rights Reserved.</h3>
+      </div>
+    </footer>
+  )
 }
 
 export default Footer;

@@ -1,5 +1,5 @@
 import logo from "../../assets/icons/logo.svg"
-import './Header.scss'
+import "./Header.scss"
 
 function Header () {
   return (
@@ -7,7 +7,7 @@ function Header () {
       <div className="header-container">
         <section id="logo">
           <div className="logo-container">
-            <h1 className="logo-text">Mall in</h1>
+            <h1 className="logo-text">Malinoff</h1>
             <img className="logo-img" src={logo} />
           </div>
         </section>
@@ -16,16 +16,16 @@ function Header () {
           <div className="search-container">
               <div className="search-window">
                 <form id="search-input-form" action="">
-                  <input className="search-input" type="text" />
+                  <input className="search-input" type="text" placeholder="Search" />
                 </form>
               </div>
               <button className="search-btn" form="search-input-form"></button>
           </div>
         </section>
 
-        <section id="sign-in">
-          <form id="sign-in-form" action="">
-            <button className="sign-in-btn btn">
+        <section id="signin">
+          <form id="signin-form" action="">
+            <button className="signin-btn btn">
               Sign In<br />
               Account
             </button>
