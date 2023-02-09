@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'Mall in';
+  src: url("../../assets/fonts/main-font.TTF");
+}
+
+.header {
+  padding: 0 24px;
+  background-color: #0062b3;
+}
+
+.header-container {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 15px 0;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+
+  .logo-text {
+    font-family: "Mall in";
+    color: blanchedalmond;
+    width: 100px
+  }
+
+  .logo-img {
+    margin-left: 15px;
+    width: 40px;
+  }
+}
+
+#search {
+  width: 100%;
+  margin-left: 20px;
+}
+
+#search-input-form {
+  width: 100%;
+}
+.search-window {
+  width: 100%;
+  margin-right: 25px;
+}
+
+.search-container {
+  background-color: blanchedalmond;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .search-input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-left: 5px;
+    display: block;
+    width: 100%;
+    height: 36px;
+    border-radius: 18px;
+
+    cursor: pointer;
+  }
+
+  .search-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    margin-right: 5px;
+    background-color: crimson;
+    border: none;
+
+    background-image: url("../../assets/icons/loupe.svg");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    cursor: pointer;
+  }
+}
+
+.btn {
+  width: 150px;
+  height: 40px;
+  margin-left: 25px;
+  border-radius: 20px;
+  border: none;
+  padding-left: 50px;
+  background-color: crimson;
+
+  text-transform: uppercase;
+  color: #ffebcd;
+
+  text-align: left;
+
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+
+  cursor: pointer;
+}
+
+.sign-in-btn {
+  background-image: url("../../assets/icons/account.svg");
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-position: 10px;
+}
+
+.cart-btn {
+  background-image: url("../../assets/icons/cart.svg");
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-position: 10px;
+}
