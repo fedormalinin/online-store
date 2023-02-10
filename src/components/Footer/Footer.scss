@@ -7,8 +7,23 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 15px 0;
+
+  h4:hover {
+    opacity: 0.5;
+    transition: ease-in-out 0.2s;
+  }
 }
 
 .footer-text {
-  display: block;
+  display: inline-block;
+  color: black;
+  cursor: default;
+}
+
+.footer-link {
+  display: inline-block;
+  color: black;
+  padding-left: 30px;
+  background: url("../../../public/github.png") no-repeat;
+  background-size: contain;
 }
