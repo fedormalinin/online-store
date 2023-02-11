@@ -11,40 +11,5 @@
   max-width: 1065px;
   display: flex;
   flex-wrap: wrap;
-}
-
-.product {
-  box-sizing: border-box;
-  max-width: 260px;
-  padding: 20px;
-  border: solid 1px rgba(128, 128, 128, 0.1);
-  max-height: fit-content;
-  margin: 10px auto;
-  border-radius: 30px;
-  transition: ease-in-out 0.2s;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-}
-
-
-
-.product__img-container {
-  max-width: 230px;
-  max-height: 180px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.product__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product__sub {
-  text-align: left;
-  margin-top: 20px;
+  list-style: none;
 }

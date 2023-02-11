@@ -1,11 +1,31 @@
+import React from 'react'
 import './Filters.scss'
 import './Products.scss'
-import product from './../../assets/img/products/1.jpg'
-import product2 from './../../assets/img/products/2.jpg'
-import product3 from './../../assets/img/products/3.jpg'
-import product4 from './../../assets/img/products/4.png'
+import Card from '../Main/Card'
+const products = [{"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]},{"id":2,"title":"iPhone X","description":"SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...","price":899,"discountPercentage":17.94,"rating":4.44,"stock":34,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/2/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/2/1.jpg","https://i.dummyjson.com/data/products/2/2.jpg","https://i.dummyjson.com/data/products/2/3.jpg","https://i.dummyjson.com/data/products/2/thumbnail.jpg"]},{"id":3,"title":"Samsung Universe 9","description":"Samsung's new variant which goes beyond Galaxy to the Universe","price":1249,"discountPercentage":15.46,"rating":4.09,"stock":36,"brand":"Samsung","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/3/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/3/1.jpg"]},{"id":4,"title":"OPPOF19","description":"OPPO F19 is officially announced on April 2021.","price":280,"discountPercentage":17.91,"rating":4.3,"stock":123,"brand":"OPPO","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/4/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/4/1.jpg","https://i.dummyjson.com/data/products/4/2.jpg","https://i.dummyjson.com/data/products/4/3.jpg","https://i.dummyjson.com/data/products/4/4.jpg","https://i.dummyjson.com/data/products/4/thumbnail.jpg"]}]
+// async function getProducts() {
+//   const response = await fetch('https://dummyjson.com/products?limit=100')
+//   .then((resolve) => {
+//     return resolve.json();
+//   })
+//   .then((data) => {
+//     return data.products;
+//   })
+//   return response;
+// }
 
 function Main () {
+  // const [count, setCount] = React.useState(0);
+  // const plus = () => setCount(count + 1);
+  // const minus = () => count > 0 ? setCount(count - 1) : 0;
+  // return (
+  //   <div>
+  //     <h1>{count}</h1>
+  //     <button onClick={plus}>+</button>
+  //     <button onClick={minus}>-</button>
+  //   </div>
+  // );
+
   return (
     <div className="main-container">
       <div className="store-container">
@@ -67,66 +87,20 @@ function Main () {
           </div>
         </div>
         <div className="store-products">
-          <div className="products-container">
-
-            <div className="product">
-              <div className="product__name">Iphone 9</div>
-              <div className="product__img-container">
-                <img className="product__img" src={product} alt="product" />
-              </div>
-              <div className="product__sub">
-                  <p>Brand: </p>
-                  <p>Price: </p>
-                  <p>Discount: </p>
-                  <p>Rating: </p>
-                  <p>Stock: </p>
-                  <p>Category: </p>
-                </div>
-            </div>
-            <div className="product">
-              <div className="product__name">Iphone 7</div>
-              <div className="product__img-container">
-                <img className="product__img" src={product2} alt="product" />
-              </div>
-              <div className="product__sub">
-                  <p>Brand: </p>
-                  <p>Price: </p>
-                  <p>Discount: </p>
-                  <p>Rating: </p>
-                  <p>Stock: </p>
-                  <p>Category: </p>
-                </div>
-            </div>
-            <div className="product">
-              <div className="product__name">Iphone 10</div>
-              <div className="product__img-container">
-                <img className="product__img" src={product3} alt="product" />
-              </div>
-              <div className="product__sub">
-                  <p>Brand: </p>
-                  <p>Price: </p>
-                  <p>Discount: </p>
-                  <p>Rating: </p>
-                  <p>Stock: </p>
-                  <p>Category: </p>
-                </div>
-            </div>
-            <div className="product">
-              <div className="product__name">Laptop</div>
-              <div className="product__img-container">
-                <img className="product__img" src={product4} alt="product" />
-              </div>
-              <div className="product__sub">
-                  <p>Brand: </p>
-                  <p>Price: </p>
-                  <p>Discount: </p>
-                  <p>Rating: </p>
-                  <p>Stock: </p>
-                  <p>Category: </p>
-                </div>
-            </div>
-
-          </div>
+          <ul className="products-container">
+            {products.map((item: any) => (
+                
+                <Card
+                  title={item.title} description={item.description}
+                  thumbnail={item.thumbnail} price={item.price}
+                  brand={item.brand} category={item.category}
+                  discountPercentage={item.discountPercentage}
+                  stock={item.stock} rating={item.rating}
+                  onClick={() => console.log(item)}
+                />
+              ))
+            }
+          </ul>
         </div>
       </div>
     </div>
