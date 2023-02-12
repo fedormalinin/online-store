@@ -1,8 +1,20 @@
-import logo from "../../assets/icons/logo.svg"
+import React from 'react';
+import logo from "./../../assets/icons/logo.svg"
 import "./Header.scss"
 import { Link } from 'react-router-dom';
 
-function Header () {
+interface HeaderProps{
+  onClickCart: any
+}
+
+const Header: React.FC<HeaderProps> = ({ onClickCart }) => {
+
+const [searchValue, setSearchValue] = React.useState('');
+const onChangeSearchInput = (event: any) => {
+  setSearchValue(event.target.value)
+  // setSearchValue()
+} 
+
   return (
     <header className="header">
       <div className="header-container">
@@ -17,7 +29,7 @@ function Header () {
           <div className="search-container">
               <div className="search-window">
                 <form id="search-input-form" action="">
-                  <input className="search-input" type="text" placeholder="Search" />
+                  <input onChange={onChangeSearchInput} className="search-input" type="text" placeholder="Search" />
                 </form>
               </div>
               <button className="search-btn" form="search-input-form"></button>
@@ -32,11 +44,11 @@ function Header () {
           </Link>
         </section>
 
-        <section id="cart">
-            <Link to="/cart"><button className="cart-btn btn">
+        <section onClick={onClickCart} id="cart">
+            <button className="cart-btn btn">
               Your cart<br />
               Total
-            </button></Link>
+            </button>
         </section>
       </div>
       </header>

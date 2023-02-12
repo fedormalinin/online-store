@@ -2,29 +2,21 @@ import React from 'react'
 import './Filters.scss'
 import './Products.scss'
 import Card from '../Main/Card'
-const products = [{"id":1,"title":"iPhone 9","description":"An apple mobile which is nothing like apple","price":549,"discountPercentage":12.96,"rating":4.69,"stock":94,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/1/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/1/1.jpg","https://i.dummyjson.com/data/products/1/2.jpg","https://i.dummyjson.com/data/products/1/3.jpg","https://i.dummyjson.com/data/products/1/4.jpg","https://i.dummyjson.com/data/products/1/thumbnail.jpg"]},{"id":2,"title":"iPhone X","description":"SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...","price":899,"discountPercentage":17.94,"rating":4.44,"stock":34,"brand":"Apple","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/2/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/2/1.jpg","https://i.dummyjson.com/data/products/2/2.jpg","https://i.dummyjson.com/data/products/2/3.jpg","https://i.dummyjson.com/data/products/2/thumbnail.jpg"]},{"id":3,"title":"Samsung Universe 9","description":"Samsung's new variant which goes beyond Galaxy to the Universe","price":1249,"discountPercentage":15.46,"rating":4.09,"stock":36,"brand":"Samsung","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/3/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/3/1.jpg"]},{"id":4,"title":"OPPOF19","description":"OPPO F19 is officially announced on April 2021.","price":280,"discountPercentage":17.91,"rating":4.3,"stock":123,"brand":"OPPO","category":"smartphones","thumbnail":"https://i.dummyjson.com/data/products/4/thumbnail.jpg","images":["https://i.dummyjson.com/data/products/4/1.jpg","https://i.dummyjson.com/data/products/4/2.jpg","https://i.dummyjson.com/data/products/4/3.jpg","https://i.dummyjson.com/data/products/4/4.jpg","https://i.dummyjson.com/data/products/4/thumbnail.jpg"]}]
-// async function getProducts() {
-//   const response = await fetch('https://dummyjson.com/products?limit=100')
-//   .then((resolve) => {
-//     return resolve.json();
-//   })
-//   .then((data) => {
-//     return data.products;
-//   })
-//   return response;
-// }
 
-function Main () {
-  // const [count, setCount] = React.useState(0);
-  // const plus = () => setCount(count + 1);
-  // const minus = () => count > 0 ? setCount(count - 1) : 0;
-  // return (
-  //   <div>
-  //     <h1>{count}</h1>
-  //     <button onClick={plus}>+</button>
-  //     <button onClick={minus}>-</button>
-  //   </div>
-  // );
+interface MainProps {
+  handleCartItem: any
+}
+
+const Main: React.FC<MainProps> = ({ handleCartItem }) => {
+  const [products, setProducts] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch('https://dummyjson.com/products?limit=100').then(res => {
+      return res.json();
+      }).then(data => {
+        setProducts(data.products)
+      })
+  }, [])
 
   return (
     <div className="main-container">
@@ -87,16 +79,23 @@ function Main () {
           </div>
         </div>
         <div className="store-products">
+          <h1>All products:</h1>
           <ul className="products-container">
-            {products.map((item: any) => (
+            {products.map((item: any, index: number) => (
                 
                 <Card
-                  title={item.title} description={item.description}
-                  thumbnail={item.thumbnail} price={item.price}
-                  brand={item.brand} category={item.category}
+                  key={index}
+                  title={item.title}
+                  description={item.description}
+                  thumbnail={item.thumbnail}
+                  price={item.price}
+                  brand={item.brand}
+                  category={item.category}
                   discountPercentage={item.discountPercentage}
-                  stock={item.stock} rating={item.rating}
-                  onClick={() => console.log(item)}
+                  stock={item.stock}
+                  rating={item.rating}
+
+                  onPlus={(obj: { title: string, thumbnail: string, price: number }) => handleCartItem(obj)}
                 />
               ))
             }
