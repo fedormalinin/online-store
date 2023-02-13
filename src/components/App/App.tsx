@@ -11,10 +11,15 @@ import Drawer from '../Drawer';
 
 const App: React.FC = () => {
 
-  const [cartOpened, setCartOpened] = React.useState(false);
-  const [cartItems, setCartItems]: any[] = React.useState([]);
+  const [searchValue, setName ] = React.useState('');
+  const handleNameChange = (searchValue: string) => {
+    setName(searchValue);
+  }
 
-  
+
+  const [cartOpened, setCartOpened] = React.useState(false);
+
+  const [cartItems, setCartItems]: any[] = React.useState([]);
   const addCartItem = (obj: {title: string, thumbnail: string, price: number} ) => {
     setCartItems((prev: any) => [...prev, obj]);
   }
@@ -22,11 +27,11 @@ const App: React.FC = () => {
   return (
     <div className="wrapper">
       {cartOpened && <Drawer products={cartItems} onClose={() => setCartOpened(false)} />}
-      <Header onClickCart={() => setCartOpened(true)} />
+      <Header onChangeInput={ handleNameChange } onClickCart={() => setCartOpened(true)} />
         <main>
           
           <Routes>
-            <Route path ="/" element={<Main handleCartItem={(obj: { title: string, thumbnail: string, price: number }) => addCartItem(obj)}/>} />
+            <Route path ="/" element={<Main searchValue={ searchValue }  handleCartItem={(obj: { title: string, thumbnail: string, price: number }) => addCartItem(obj)} />} />
             <Route path ="/signin" element={<Signin />} />
             <Route path ="/cart" element={<Cart />} />
             <Route path ="*" element={<NotFoundPage />} />

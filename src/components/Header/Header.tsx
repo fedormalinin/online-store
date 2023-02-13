@@ -4,16 +4,15 @@ import "./Header.scss"
 import { Link } from 'react-router-dom';
 
 interface HeaderProps{
+  onChangeInput: any,
   onClickCart: any
 }
 
-const Header: React.FC<HeaderProps> = ({ onClickCart }) => {
+const Header: React.FC<HeaderProps> = ({ onChangeInput, onClickCart }) => {
 
-const [searchValue, setSearchValue] = React.useState('');
-const onChangeSearchInput = (event: any) => {
-  setSearchValue(event.target.value)
-  // setSearchValue()
-} 
+  const handleInputChange = (event: any) => {
+    onChangeInput(event.target.value)
+  }
 
   return (
     <header className="header">
@@ -29,7 +28,7 @@ const onChangeSearchInput = (event: any) => {
           <div className="search-container">
               <div className="search-window">
                 <form id="search-input-form" action="">
-                  <input onChange={onChangeSearchInput} className="search-input" type="text" placeholder="Search" />
+                  <input onChange={ handleInputChange } className="search-input" type="text" placeholder="Search" />
                 </form>
               </div>
               <button className="search-btn" form="search-input-form"></button>

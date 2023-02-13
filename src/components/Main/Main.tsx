@@ -1,13 +1,13 @@
 import React from 'react'
-import './Filters.scss'
-import './Products.scss'
+import './Main.scss'
 import Card from '../Main/Card'
 
 interface MainProps {
+  searchValue: any,
   handleCartItem: any
 }
 
-const Main: React.FC<MainProps> = ({ handleCartItem }) => {
+const Main: React.FC<MainProps> = ( { searchValue, handleCartItem }) => {
   const [products, setProducts] = React.useState([]);
 
   React.useEffect(() => {
@@ -79,9 +79,9 @@ const Main: React.FC<MainProps> = ({ handleCartItem }) => {
           </div>
         </div>
         <div className="store-products">
-          <h1>All products:</h1>
+          <h1>{ searchValue ? `Search by: ${searchValue}` : 'All products:' }</h1>
           <ul className="products-container">
-            {products.map((item: any, index: number) => (
+            {products.filter((item: any) => item.title.toLowerCase().includes(`${searchValue.toLowerCase()}`)).map((item: any, index: number) => (
                 
                 <Card
                   key={index}

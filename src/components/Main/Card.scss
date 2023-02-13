@@ -37,6 +37,10 @@
   justify-content: space-between;
   flex-direction: column;
 
+  .product__name {
+    text-transform: uppercase;
+  }
+
   transition: transform ease-in-out 0.2s, box-shadow 0.2s ease-in-out;
   &:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

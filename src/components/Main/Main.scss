@@ -137,3 +137,26 @@
   color: #fff8ee;
   text-transform: uppercase;
 }
+
+
+// PRODUCTS
+
+.store-products {
+  font-family: 'Walmart';
+  font-weight: bold;
+  width: 100%;
+
+  width: 74%;
+
+  h1 {
+    text-align: left;
+  }
+}
+
+.products-container {
+  max-width: 1065px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: space-around;
+}
