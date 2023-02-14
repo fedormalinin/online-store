@@ -2,6 +2,18 @@ import React from 'react'
 import './Main.scss'
 import Card from '../Main/Card'
 
+const category = [
+    'smartphones',
+    'laptops',
+    'fragrances',
+    'skincare',
+    'groceries',
+    'home-decoration',
+    'furniture',
+    'tops',
+    'womens-dresses'
+]
+
 interface MainProps {
   searchValue: any,
   handleCartItem: any
@@ -11,10 +23,11 @@ const Main: React.FC<MainProps> = ( { searchValue, handleCartItem }) => {
   const [products, setProducts] = React.useState([]);
 
   React.useEffect(() => {
-    fetch('https://dummyjson.com/products?limit=100').then(res => {
+    fetch('https://63e896464f3c6aa6e7bfec49.mockapi.io/products').then(res => {
       return res.json();
       }).then(data => {
-        setProducts(data.products)
+        console.log(JSON.stringify(data));
+        setProducts(data)
       })
   }, [])
 
@@ -28,40 +41,15 @@ const Main: React.FC<MainProps> = ( { searchValue, handleCartItem }) => {
             <div className="filter-category filter-block"><h3>Category</h3>
             <hr />
             <ul>
-              <li>
-                <input type="checkbox" id="smartphones" />
-                <label htmlFor='smartphones'>Smartphones</label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="laptops" />
-                <label htmlFor='laptops'>Laptops</label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="fragrances" />
-                <label htmlFor='fragrances'>Fragrances</label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="skincare" />
-                <label htmlFor='skincare'>Skincare</label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="groceries" />
-                <label htmlFor='groceries'>Groceries</label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="home-decoration" />
-                <label htmlFor='home-decoration'>Home-decoration</label>
-              </li>
-
-              <li>
-                <input type="checkbox" id="furniture" />
-                <label htmlFor='furniture'>Furniture</label>
-              </li>
+              {
+                category.map((item) => (
+                  <li>
+                    <input type="checkbox" id={item} />
+                    <label htmlFor={item}>{item}</label>
+                  </li>
+                ))
+              }
+              
             </ul>
           </div>
 

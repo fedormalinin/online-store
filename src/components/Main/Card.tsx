@@ -17,16 +17,16 @@ interface cardProps {
 }
 
 const Card: React.FC<cardProps> = ({
-  title,
-  thumbnail,
-  description,
-  brand,
-  price,
-  discountPercentage,
-  rating,
-  stock,
-  category,
-  onPlus
+    title,
+    thumbnail,
+    description,
+    brand,
+    price,
+    discountPercentage,
+    rating,
+    stock,
+    category,
+    onPlus
   }) => {
   const [isAdded, setIsAdded] = React.useState(false);
 
