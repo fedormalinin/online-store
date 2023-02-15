@@ -27,7 +27,14 @@ const Main: React.FC<MainProps> = ({ searchValue, handleCartItem }) => {
     axios
       .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/products")
       .then((res) => {
+        console.log("Все продукты получены: ", res.data);
         setProducts(res.data);
+      });
+    axios
+      .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart")
+      .then((res) => {
+        console.log("Товары с серверной корзины получены: " + res);
+        // return res.data ? handleCartItem(res.data) : null;
       });
   }, []);
 

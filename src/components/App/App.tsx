@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-import axios from "axios";
+// import axios from "axios";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -11,6 +11,7 @@ import NotFoundPage from "../pages/NotFountPage";
 import Drawer from "../Drawer";
 
 const App: React.FC = () => {
+  console.log("App started");
   const [searchValue, setName] = React.useState("");
   const handleNameChange = (searchValue: string) => {
     setName(searchValue);
@@ -26,8 +27,10 @@ const App: React.FC = () => {
     price: number;
   }) => {
     // Добавление товара на сервер в cart
-    axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
+    console.log(obj);
+    // axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
     // Добавление товара в стейт
+    console.log("Товар добавлен в стейт корзины");
     setCartItems((prev: any) => [...prev, obj]);
   };
 
