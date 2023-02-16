@@ -25,6 +25,7 @@ const Main: React.FC<MainProps> = ({ searchValue, handleCartItem }) => {
 
   React.useEffect(() => {
     axios
+      // .get("https://dummyjson.com/products?limit=10")
       .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/products")
       .then((res) => {
         console.log("Все продукты получены: ", res.data);

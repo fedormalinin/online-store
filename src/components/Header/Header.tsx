@@ -6,9 +6,14 @@ import { Link } from "react-router-dom";
 interface HeaderProps {
   onChangeInput: any;
   onClickCart: any;
+  cartItems?: any;
 }
 
-const Header: React.FC<HeaderProps> = ({ onChangeInput, onClickCart }) => {
+const Header: React.FC<HeaderProps> = ({
+  onChangeInput,
+  onClickCart,
+  cartItems,
+}) => {
   const handleInputChange = (event: any) => {
     onChangeInput(event.target.value);
   };
@@ -57,7 +62,10 @@ const Header: React.FC<HeaderProps> = ({ onChangeInput, onClickCart }) => {
           <button className='cart-btn btn'>
             Your cart
             <br />
-            Total
+            Total:{" "}
+            {cartItems.reduce((accum: number, curValue: { price: number }) => {
+              return accum + curValue.price;
+            }, 0)}
           </button>
         </section>
       </div>

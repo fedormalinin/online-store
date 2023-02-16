@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-// import axios from "axios";
+import axios from "axios";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -28,20 +28,31 @@ const App: React.FC = () => {
   }) => {
     // Добавление товара на сервер в cart
     console.log(obj);
-    // axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
+    axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
     // Добавление товара в стейт
     console.log("Товар добавлен в стейт корзины");
     setCartItems((prev: any) => [...prev, obj]);
   };
 
+  const removeCardItem = (id: number) => {
+    console.log(id);
+    axios.delete(`https://63e896464f3c6aa6e7bfec49.mockapi.io/cart/${id}`);
+    setCartItems((prev: any) => prev.filter((item: any) => item.id !== id));
+  };
+
   return (
     <div className='wrapper'>
       {cartOpened && (
-        <Drawer products={cartItems} onClose={() => setCartOpened(false)} />
+        <Drawer
+          onClose={() => setCartOpened(false)}
+          onRemove={removeCardItem}
+          cartItems={cartItems}
+        />
       )}
       <Header
         onChangeInput={handleNameChange}
         onClickCart={() => setCartOpened(true)}
+        cartItems={cartItems}
       />
       <main>
         <Routes>
