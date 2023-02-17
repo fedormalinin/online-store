@@ -26,11 +26,8 @@ const App: React.FC = () => {
     thumbnail: string;
     price: number;
   }) => {
-    // Добавление товара на сервер в cart
-    console.log(obj);
-    axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
-    // Добавление товара в стейт
-    console.log("Товар добавлен в стейт корзины");
+    console.log("Товар добавлен в корзину");
+    // axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
     setCartItems((prev: any) => [...prev, obj]);
   };
 

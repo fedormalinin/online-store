@@ -42,6 +42,7 @@ const Card: React.FC<cardProps> = ({
       <div className='product__img-container'>
         <img className='product__img' src={thumbnail} alt='product' />
       </div>
+
       <div className='product__sub'>
         <p>{description}</p>
         <p>Brand: {brand}</p>

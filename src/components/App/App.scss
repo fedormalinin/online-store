@@ -1,31 +1,30 @@
 @font-face {
-  font-family: 'Bookerly';
+  font-family: "Bookerly";
   src: url("/../src/assets/fonts/Bookerly.ttf");
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Bookerly';
+  font-family: "Bookerly";
   src: url("/../src/assets/fonts/BookerlyBold.ttf");
   font-weight: bold;
 }
 
 @font-face {
-  font-family: 'Bookerly';
+  font-family: "Bookerly";
   src: url("/../src/assets/fonts/BookerlyLight.ttf");
   font-weight: light;
 }
 
 @font-face {
-  font-family: 'Walmart';
+  font-family: "Walmart";
   src: url("../../assets/fonts/Walmart.TTF");
 }
-
 
 .wrapper {
   text-align: center;
   // background-color: #262626;
-  background-color: #fff8ee;
+  background-color: #ffffff;
   scroll-behavior: smooth;
 }
 
