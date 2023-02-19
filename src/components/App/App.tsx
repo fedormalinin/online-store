@@ -7,6 +7,7 @@ import Footer from "../Footer/Footer";
 import { Routes, Route } from "react-router-dom";
 import Signin from "../pages/Signin";
 import Cart from "../pages/Cart";
+import Product from "../pages/Product";
 import NotFoundPage from "../pages/NotFountPage";
 import Drawer from "../Drawer";
 
@@ -27,12 +28,11 @@ const App: React.FC = () => {
     price: number;
   }) => {
     console.log("Товар добавлен в корзину");
-    // axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
+    axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
     setCartItems((prev: any) => [...prev, obj]);
   };
 
   const removeCardItem = (id: number) => {
-    console.log(id);
     axios.delete(`https://63e896464f3c6aa6e7bfec49.mockapi.io/cart/${id}`);
     setCartItems((prev: any) => prev.filter((item: any) => item.id !== id));
   };
@@ -63,11 +63,13 @@ const App: React.FC = () => {
                   thumbnail: string;
                   price: number;
                 }) => addCartItem(obj)}
+                initCartItems={(obj: any) => setCartItems(obj)}
               />
             }
           />
           <Route path='/signin' element={<Signin />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/product' element={<Product />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>

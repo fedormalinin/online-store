@@ -1,6 +1,6 @@
 import React from "react";
 
-class List extends React.Component {
+class Calc extends React.Component {
   state = {
     numbers: [1, 2, 900000],
   };
@@ -45,4 +45,4 @@ class List extends React.Component {
   }
 }
 
-export default List;
+export default Calc;

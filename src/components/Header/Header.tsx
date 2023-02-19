@@ -14,6 +14,7 @@ const Header: React.FC<HeaderProps> = ({
   onClickCart,
   cartItems,
 }) => {
+  console.log("Header started");
   const handleInputChange = (event: any) => {
     onChangeInput(event.target.value);
   };

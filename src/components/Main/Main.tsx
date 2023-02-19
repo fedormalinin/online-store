@@ -18,24 +18,30 @@ const category = [
 interface MainProps {
   searchValue: any;
   handleCartItem: any;
+  initCartItems: any;
 }
 
-const Main: React.FC<MainProps> = ({ searchValue, handleCartItem }) => {
+const Main: React.FC<MainProps> = ({
+  searchValue,
+  handleCartItem,
+  initCartItems,
+}) => {
+  console.log("Main started");
   const [products, setProducts] = React.useState([]);
 
   React.useEffect(() => {
     axios
-      // .get("https://dummyjson.com/products?limit=10")
-      .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/products")
+      .get("https://dummyjson.com/products?limit=12")
+      // .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/products")
       .then((res) => {
-        // console.log("Все продукты получены: ", res.data);
-        setProducts(res.data);
+        setProducts(res.data.products);
+        // return setProducts(res.data);
       });
+
     axios
       .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart")
       .then((res) => {
-        // console.log("Товары с серверной корзины получены: " + res);
-        return res.data ? handleCartItem(res.data) : null;
+        initCartItems(res.data);
       });
   }, []);
 
@@ -50,8 +56,8 @@ const Main: React.FC<MainProps> = ({ searchValue, handleCartItem }) => {
               <h3>Category</h3>
               <hr />
               <ul>
-                {category.map((item) => (
-                  <li>
+                {category.map((item, index) => (
+                  <li key={index}>
                     <input type='checkbox' id={item} />
                     <label htmlFor={item}>{item}</label>
                   </li>
