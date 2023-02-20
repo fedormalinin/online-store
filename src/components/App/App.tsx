@@ -12,7 +12,6 @@ import NotFoundPage from "../pages/NotFountPage";
 import Drawer from "../Drawer";
 
 const App: React.FC = () => {
-  console.log("App started");
   const [searchValue, setName] = React.useState("");
   const handleNameChange = (searchValue: string) => {
     setName(searchValue);
@@ -23,16 +22,27 @@ const App: React.FC = () => {
   // Добавление товара в корзину
   const [cartItems, setCartItems]: any[] = React.useState([]);
   const addCartItem = (obj: {
+    id: number;
     title: string;
     thumbnail: string;
     price: number;
   }) => {
-    console.log("Товар добавлен в корзину");
-    axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
-    setCartItems((prev: any) => [...prev, obj]);
+    if (
+      cartItems.find(
+        (item: { id: number }) => Number(item.id) === Number(obj.id)
+      )
+    ) {
+      // setCartItems((prev: any) =>
+      //   prev.filter((item: any) => item.id !== obj.id)
+      // );
+      removeCartItem(obj.id);
+    } else {
+      axios.post("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart", obj);
+      setCartItems((prev: any) => [...prev, obj]);
+    }
   };
 
-  const removeCardItem = (id: number) => {
+  const removeCartItem = (id: number) => {
     axios.delete(`https://63e896464f3c6aa6e7bfec49.mockapi.io/cart/${id}`);
     setCartItems((prev: any) => prev.filter((item: any) => item.id !== id));
   };
@@ -42,7 +52,7 @@ const App: React.FC = () => {
       {cartOpened && (
         <Drawer
           onClose={() => setCartOpened(false)}
-          onRemove={removeCardItem}
+          onRemove={removeCartItem}
           cartItems={cartItems}
         />
       )}
@@ -59,11 +69,17 @@ const App: React.FC = () => {
               <Main
                 searchValue={searchValue}
                 handleCartItem={(obj: {
+                  id: number;
                   title: string;
                   thumbnail: string;
                   price: number;
                 }) => addCartItem(obj)}
                 initCartItems={(obj: any) => setCartItems(obj)}
+                added={(itemId: number) =>
+                  cartItems.some((obj: any) => {
+                    return Number(itemId) === Number(obj.id);
+                  })
+                }
               />
             }
           />

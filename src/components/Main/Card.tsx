@@ -4,6 +4,7 @@ import plus from "./../../../src/assets/icons/plus.svg";
 import plusChecked from "./../../../src/assets/icons/plusChecked.svg";
 
 interface cardProps {
+  id: number;
   title: string;
   thumbnail: string;
   description: string;
@@ -14,9 +15,11 @@ interface cardProps {
   stock: number;
   category: string;
   onPlus: any;
+  added: any;
 }
 
 const Card: React.FC<cardProps> = ({
+  id,
   title,
   thumbnail,
   description,
@@ -27,12 +30,14 @@ const Card: React.FC<cardProps> = ({
   stock,
   category,
   onPlus,
+  added = true,
 }) => {
-  const [isAdded, setIsAdded] = React.useState(false);
+  const [isAdded, setIsAdded] = React.useState(added);
 
   const onClickPlus = () => {
-    onPlus({ title, thumbnail, price });
+    onPlus({ id, title, thumbnail, price });
     setIsAdded(!isAdded);
+    console.log(isAdded);
   };
   React.useEffect(() => {}, [isAdded]);
 

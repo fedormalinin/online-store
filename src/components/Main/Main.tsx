@@ -19,14 +19,15 @@ interface MainProps {
   searchValue: any;
   handleCartItem: any;
   initCartItems: any;
+  added: any;
 }
 
 const Main: React.FC<MainProps> = ({
   searchValue,
   handleCartItem,
   initCartItems,
+  added,
 }) => {
-  console.log("Main started");
   const [products, setProducts] = React.useState([]);
 
   React.useEffect(() => {
@@ -86,9 +87,10 @@ const Main: React.FC<MainProps> = ({
                   .toLowerCase()
                   .includes(`${searchValue.toLowerCase()}`)
               )
-              .map((item: any, index: number) => (
+              .map((item: any) => (
                 <Card
-                  key={index}
+                  key={item.id}
+                  id={item.id}
                   title={item.title}
                   description={item.description}
                   thumbnail={item.thumbnail}
@@ -99,10 +101,12 @@ const Main: React.FC<MainProps> = ({
                   stock={item.stock}
                   rating={item.rating}
                   onPlus={(obj: {
+                    id: number;
                     title: string;
                     thumbnail: string;
                     price: number;
                   }) => handleCartItem(obj)}
+                  added={() => added(item.id)}
                 />
               ))}
           </ul>
