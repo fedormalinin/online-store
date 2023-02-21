@@ -31,19 +31,19 @@ const Main: React.FC<MainProps> = ({
   const [products, setProducts] = React.useState([]);
 
   React.useEffect(() => {
-    axios
-      .get("https://dummyjson.com/products?limit=12")
-      // .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/products")
-      .then((res) => {
-        setProducts(res.data.products);
-        // return setProducts(res.data);
-      });
+    async function fetchData() {
+      const cartResponse = await axios.get(
+        "https://63e896464f3c6aa6e7bfec49.mockapi.io/cart"
+      );
+      const itemsResponse = await axios.get(
+        "https://dummyjson.com/products?limit=12"
+      );
 
-    axios
-      .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/cart")
-      .then((res) => {
-        initCartItems(res.data);
-      });
+      initCartItems(cartResponse.data);
+      setProducts(itemsResponse.data.products);
+    }
+    fetchData();
+    // .get("https://63e896464f3c6aa6e7bfec49.mockapi.io/products")
   }, []);
 
   return (
@@ -101,7 +101,7 @@ const Main: React.FC<MainProps> = ({
                   stock={item.stock}
                   rating={item.rating}
                   onPlus={(obj: {
-                    id: number;
+                    id: string;
                     title: string;
                     thumbnail: string;
                     price: number;

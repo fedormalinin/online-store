@@ -62,10 +62,11 @@ const Header: React.FC<HeaderProps> = ({
           <button className='cart-btn btn'>
             Your cart
             <br />
-            Total:{" "}
+            <span>Total: </span>
             {cartItems.reduce((accum: number, curValue: { price: number }) => {
               return accum + curValue.price;
             }, 0)}
+            $
           </button>
         </section>
       </div>

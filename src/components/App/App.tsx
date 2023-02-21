@@ -22,14 +22,15 @@ const App: React.FC = () => {
   // Добавление товара в корзину
   const [cartItems, setCartItems]: any[] = React.useState([]);
   const addCartItem = (obj: {
-    id: number;
+    id: string;
     title: string;
     thumbnail: string;
     price: number;
   }) => {
+    console.log(obj.id, typeof obj.id);
     if (
       cartItems.find(
-        (item: { id: number }) => Number(item.id) === Number(obj.id)
+        (item: { id: string }) => Number(item.id) === Number(obj.id)
       )
     ) {
       // setCartItems((prev: any) =>
@@ -42,7 +43,7 @@ const App: React.FC = () => {
     }
   };
 
-  const removeCartItem = (id: number) => {
+  const removeCartItem = (id: string) => {
     axios.delete(`https://63e896464f3c6aa6e7bfec49.mockapi.io/cart/${id}`);
     setCartItems((prev: any) => prev.filter((item: any) => item.id !== id));
   };
@@ -69,7 +70,7 @@ const App: React.FC = () => {
               <Main
                 searchValue={searchValue}
                 handleCartItem={(obj: {
-                  id: number;
+                  id: string;
                   title: string;
                   thumbnail: string;
                   price: number;
