@@ -2,21 +2,21 @@ import React from "react";
 import logo from "./../../assets/icons/logo.svg";
 import "./Header.scss";
 import { Link } from "react-router-dom";
+import { AppContext, CartItemsContextType } from "../context/AppContext";
+import {
+  HeaderContext,
+  HeaderItemsContextType,
+} from "../context/HeaderContext";
 
 interface HeaderProps {
-  onChangeInput: any;
   onClickCart: any;
-  cartItems?: any;
 }
 
-const Header: React.FC<HeaderProps> = ({
-  onChangeInput,
-  onClickCart,
-  cartItems,
-}) => {
-  const handleInputChange = (event: any) => {
-    onChangeInput(event.target.value);
-  };
+const Header: React.FC<HeaderProps> = ({ onClickCart }) => {
+  const { cartItems } = React.useContext(AppContext) as CartItemsContextType;
+  const { handleInputChange } = React.useContext(
+    HeaderContext
+  ) as HeaderItemsContextType;
 
   return (
     <header className='header'>
@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({
             <div className='search-window'>
               <form id='search-input-form' action=''>
                 <input
-                  onChange={handleInputChange}
+                  onChange={(event) => handleInputChange(event)}
                   className='search-input'
                   type='text'
                   placeholder='Search'

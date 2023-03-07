@@ -2,6 +2,12 @@ import React from "react";
 import "./Main.scss";
 import axios from "axios";
 import Card from "../Main/Card";
+import { AppContext, CartItemsContextType } from "../context/AppContext";
+import { MainContext, MainContextType } from "../context/MainContext";
+import {
+  HeaderContext,
+  HeaderItemsContextType,
+} from "../context/HeaderContext";
 
 const category = [
   "smartphones",
@@ -15,20 +21,17 @@ const category = [
   "womens-dresses",
 ];
 
-interface MainProps {
-  searchValue: any;
-  handleCartItem: any;
-  initCartItems: any;
-  added: any;
-}
+const Main: React.FC = () => {
+  const { addCartItem, setCartItems } = React.useContext(
+    AppContext
+  ) as CartItemsContextType;
 
-const Main: React.FC<MainProps> = ({
-  searchValue,
-  handleCartItem,
-  initCartItems,
-  added,
-}) => {
-  const [products, setProducts] = React.useState([]);
+  const { products, setProducts, isLoading, filteredProducts, setIsLoading } =
+    React.useContext(MainContext) as MainContextType;
+  console.log(products);
+  const { handleInputChange } = React.useContext(
+    HeaderContext
+  ) as HeaderItemsContextType;
 
   React.useEffect(() => {
     async function fetchData() {
@@ -39,7 +42,8 @@ const Main: React.FC<MainProps> = ({
         "https://dummyjson.com/products?limit=12"
       );
 
-      initCartItems(cartResponse.data);
+      setIsLoading(false);
+      setCartItems(cartResponse.data);
       setProducts(itemsResponse.data.products);
     }
     fetchData();
@@ -79,36 +83,36 @@ const Main: React.FC<MainProps> = ({
           </div>
         </div>
         <div className='store-products'>
-          <h1>{searchValue ? `Search by: ${searchValue}` : "All products:"}</h1>
+          <h1>
+            {handleInputChange
+              ? `Search by: ${handleInputChange}`
+              : "All products:"}
+          </h1>
           <ul className='products-container'>
-            {products
-              .filter((item: any) =>
-                item.title
-                  .toLowerCase()
-                  .includes(`${searchValue.toLowerCase()}`)
-              )
-              .map((item: any) => (
+            {(isLoading ? [...Array(8)] : filteredProducts).map(
+              (item?: any) => (
                 <Card
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  description={item.description}
-                  thumbnail={item.thumbnail}
-                  price={item.price}
-                  brand={item.brand}
-                  category={item.category}
-                  discountPercentage={item.discountPercentage}
-                  stock={item.stock}
-                  rating={item.rating}
+                  key={item && item.id}
+                  id={item && item.id}
+                  title={item && item.title}
+                  description={item && item.description}
+                  thumbnail={item && item.thumbnail}
+                  price={item && item.price}
+                  brand={item && item.brand}
+                  category={item && item.category}
+                  discountPercentage={item && item.discountPercentage}
+                  stock={item && item.stock}
+                  rating={item && item.rating}
                   onPlus={(obj: {
                     id: string;
                     title: string;
                     thumbnail: string;
                     price: number;
-                  }) => handleCartItem(obj)}
-                  added={() => added(item.id)}
+                  }) => addCartItem(obj)}
+                  isLoading={isLoading}
                 />
-              ))}
+              )
+            )}
           </ul>
         </div>
       </div>

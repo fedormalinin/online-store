@@ -1,16 +1,20 @@
 import "./Drawer.scss";
 import emptyCart from "../assets/img/empty-cart.png";
 import { Link } from "react-router-dom";
+import { AppContext, CartItemsContextType } from "./context/AppContext";
+import React from "react";
 
 interface DrawerProps {
   onClose: any;
-  onRemove: any;
-  cartItems?: any;
 }
 
-const Drawer: React.FC<DrawerProps> = ({ onClose, onRemove, cartItems }) => {
+const Drawer: React.FC<DrawerProps> = ({ onClose }) => {
+  const { cartItems, removeCartItem } = React.useContext(
+    AppContext
+  ) as CartItemsContextType;
   return (
-    <div className='overlay'>
+    <div className='drawer-container'>
+      <div className='overlay' onClick={onClose}></div>
       <div className='drawer'>
         <div className='cart-header'>
           <h2>Cart</h2>
@@ -37,7 +41,7 @@ const Drawer: React.FC<DrawerProps> = ({ onClose, onRemove, cartItems }) => {
                       </div>
                     </div>
                     <div
-                      onClick={() => onRemove(product.id)}
+                      onClick={() => removeCartItem(product.id)}
                       className='product-delete'
                     ></div>
                   </li>
